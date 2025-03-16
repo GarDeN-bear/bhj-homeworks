@@ -16,11 +16,20 @@ function checkClickOnMole() {
     dead.textContent = (++deadCount).toString();
     if (deadCount >= 10) {
       alert('WIN');
+      resetStatistics();
     }
   } else {
     lost.textContent = (++lostCount).toString();
     if (lostCount >= 5) {
       alert('WASTED');
+      resetStatistics();
     }
   }
+}
+
+function resetStatistics() {
+  deadCount = 0;
+  lostCount = 0;
+  dead.textContent = deadCount.toString();
+  lost.textContent = lostCount.toString();
 }
