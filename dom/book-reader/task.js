@@ -1,16 +1,31 @@
 let book = document.getElementById('book');
-let fontSizes = Array.from(document.getElementsByClassName('font-size'));
+let fontSizes =
+    Array.from(document.getElementsByClassName('book__control_font-size')[0]
+                   .getElementsByClassName('font-size'));
+let textColors =
+    Array.from(document.getElementsByClassName('book__control_color')[0]
+                   .getElementsByClassName('color'));
 
-fontSizes.forEach((el) => {
-  el.addEventListener('click', (e) => {
-    e.preventDefault();
+let backgroundColors =
+    Array.from(document.getElementsByClassName('book__control_background')[0]
+                   .getElementsByClassName('color'));
 
-    fontSizes.forEach((font) => {
-      book.classList.remove(font.classList[1]);
-      font.classList.remove('font-size_active');
+function switchMode(elements, activeClass) {
+  elements.forEach((el) => {
+    el.addEventListener('click', (e) => {
+      e.preventDefault();
+
+      elements.forEach((elem) => {
+        book.classList.remove(elem.classList[1]);
+        elem.classList.remove(activeClass);
+      });
+
+      book.classList.add(el.classList[1]);
+      el.classList.add(activeClass);
     });
-
-    book.classList.add(el.classList[1]);
-    el.classList.add('font-size_active');
   });
-});
+}
+
+switchMode(fontSizes, 'font-size_active');
+switchMode(textColors, 'color_active');
+switchMode(backgroundColors, 'color_active');
