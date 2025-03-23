@@ -122,13 +122,13 @@ body {
 }
 
 .text_color_black {
-    color: #000;
+    background: #000;
 }
 
 .text_color_gray {
-    color: grey;
+    background: grey;
 }
 
 .text_color_whitesmoke {
-    color: whitesmoke;
+    background: whitesmoke;
 }
