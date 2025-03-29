@@ -1,42 +1,48 @@
 let hasTooltipsCollection = document.getElementsByClassName('has-tooltip');
 let hasTooltipsArray = Array.from(hasTooltipsCollection);
-let previousDiv;
+
+function createSpecialTooltip() {
+  let tooltip = document.createElement('div');
+  tooltip.classList.add('tooltip');
+  tooltip.textContent = '';
+  tooltip.setAttribute('data-position', 'bottom');
+  hasTooltipsCollection.item(0).insertAdjacentElement('afterEnd', tooltip);
+}
+
+createSpecialTooltip();
 
 hasTooltipsArray.forEach((el, i) => {
-  let div = document.createElement('div');
-  div.textContent = el.title;
-  el.removeAttribute('title');
-  div.setAttribute('data-position', 'right');
-  div.classList.add('tooltip');
-  hasTooltipsCollection.item(i).insertAdjacentElement('afterEnd', div);
-  previousDiv = div;
+  let tooltip = document.querySelector('.tooltip');
   el.addEventListener('click', function(event) {
     event.preventDefault();
 
-    if (div.classList.contains('tooltip_active')) {
-      div.classList.remove('tooltip_active');
+    let prevTooltipText = tooltip.textContent;
+    tooltip.textContent = el.title;
+    if (prevTooltipText === tooltip.textContent) {
+      tooltip.classList.remove('tooltip_active');
     } else {
-      previousDiv.classList.remove('tooltip_active');
-      div.classList.add('tooltip_active');
+      tooltip.classList.add('tooltip_active');
     }
 
-    previousDiv = div;
-    switch (div.getAttribute('data-position')) {
+    switch (tooltip.getAttribute('data-position')) {
       case 'top':
-        div.style.left = el.offsetLeft.toString() + 'px';
-        div.style.top = (el.offsetTop - el.offsetHeight - 10).toString() + 'px';
+        tooltip.style.left = el.offsetLeft.toString() + 'px';
+        tooltip.style.top =
+            (el.offsetTop - el.offsetHeight - 10).toString() + 'px';
         break;
       case 'left':
-        div.style.left = (el.offsetLeft - div.offsetWidth).toString() + 'px';
-        div.style.top = el.offsetTop.toString() + 'px';
+        tooltip.style.left =
+            (el.offsetLeft - tooltip.offsetWidth).toString() + 'px';
+        tooltip.style.top = el.offsetTop.toString() + 'px';
         break;
       case 'right':
-        div.style.left = (el.offsetLeft + el.offsetWidth + 1).toString() + 'px';
-        div.style.top = el.offsetTop.toString() + 'px';
+        tooltip.style.left =
+            (el.offsetLeft + el.offsetWidth + 1).toString() + 'px';
+        tooltip.style.top = el.offsetTop.toString() + 'px';
         break;
       case 'bottom':
-        div.style.left = el.offsetLeft.toString() + 'px';
-        div.style.top = (el.offsetTop + el.offsetHeight).toString() + 'px';
+        tooltip.style.left = el.offsetLeft.toString() + 'px';
+        tooltip.style.top = (el.offsetTop + el.offsetHeight).toString() + 'px';
         break;
     }
   });
