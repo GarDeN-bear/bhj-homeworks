@@ -18,7 +18,8 @@ hasTooltipsArray.forEach((el, i) => {
 
     let prevTooltipText = tooltip.textContent;
     tooltip.textContent = el.title;
-    if (prevTooltipText === tooltip.textContent) {
+    if ((prevTooltipText === tooltip.textContent) &&
+        tooltip.classList.contains('tooltip_active')) {
       tooltip.classList.remove('tooltip_active');
     } else {
       tooltip.classList.add('tooltip_active');
