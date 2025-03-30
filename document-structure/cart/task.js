@@ -11,7 +11,7 @@ products.forEach((el, i) => {
 
   dec.addEventListener('click', () => {
     let valueInt = Number(value.textContent);
-    value.textContent = (Math.max(0, --valueInt)).toString();
+    value.textContent = (Math.max(1, --valueInt)).toString();
   });
 
   inc.addEventListener('click', () => {
