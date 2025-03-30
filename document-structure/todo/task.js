@@ -23,7 +23,8 @@ function createHtmlElement(title) {
 taskAdd.addEventListener('click', (event) => {
   event.preventDefault();
 
-  if (!taskInput.value.length == 0) {
+  if (!taskInput.value.trim().length == 0) {
     createHtmlElement(taskInput.value);
   }
+  taskInput.value = '';
 });
