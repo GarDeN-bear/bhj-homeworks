@@ -1,5 +1,4 @@
 let form = document.getElementById('signin__form');
-
 if (localStorage.getItem('userId')) {
   document.getElementById('signin').classList.remove('signin_active');
   document.getElementById('welcome').classList.add('welcome_active');
@@ -34,5 +33,11 @@ function handleResponse(response) {
     document.getElementById('signin').classList.remove('signin_active');
   } else {
     alert('Неверный логин/пароль');
+    location.reload();
   }
 }
+
+document.getElementById('signout__btn').addEventListener('click', () => {
+  localStorage.removeItem('userId');
+  location.reload();
+});
