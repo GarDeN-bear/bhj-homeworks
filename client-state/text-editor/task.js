@@ -9,6 +9,6 @@ button.classList.add('button__clear');
 button.textContent = 'Очистить';
 button.addEventListener('click', () => {
   editor.value = '';
-  localStorage.setItem('editor', editor.value);
+  localStorage.removeItem('editor');
 });
 document.querySelector('.card').appendChild(button);
